@@ -5,36 +5,57 @@ import static java.lang.Math;
 private class Points{
 
 	private ArrayList<OrderedPair> points;
-	private int numPoints;
-	private double closestDistance;
 
 	public Points(ArrayList<OrderedPair> list){
 		
 		points = list;
-		numPoints = points.size();
-
-		// set the closest distance as the distance between
-		// the first to points to have a base
-		closestDistance = distanceBetween(points(0),points(1));
 	
 	}
 
-	private ArrayList<OrderedPair> orderByX(){
+	private ArrayList<OrderedPair> orderByX(ArrayList<OrderedPair> list){
+
+		if(list.size() == 1){
+			return list;
+		}
+
+		if(list.size() == 2){
+			if(list(0).smallerX(list(1))){
+				return list;
+			}
+			ArrayList<OrderedPair> sorted = new ArrayList();
+			sorted.add(list(1));
+			sorted.add(list(0));
+			return sorted;
+		}
 		
-		ArrayList<OrderedPair> sorted;
+		ArrayList<OrderedPair> sorted = new ArrayList();
 
-		for(int i = 0; i < numPoints; i++){
-
+		for(int i = 0; i < list.size()-1; i++){
+			
 		}
 		return sorted;
 	
 	}
 
-	private ArrayList<OrderedPair> orderByY(){
+	private ArrayList<OrderedPair> orderByY(ArrayList<OrderedPair> list){
+
+		if(list.size() == 1){
+			return list;
+		}
+
+		if(list.size() == 2){
+			if(list(0).smallerY(list(1))){
+				return list;
+			}
+			ArrayList<OrderedPair> sorted = new ArrayList();
+			sorted.add(list(1));
+			sorted.add(list(0));
+			return sorted;
+		}
 		
 		ArrayList<OrderedPair> sorted;
 
-		for(int i = 0; i < numPoints; i++){
+		for(int i = 0; i < list.size()-1; i++){
 
 		}
 		return sorted;
@@ -44,12 +65,18 @@ private class Points{
 	private ArrayList<OrderedPair> greedy(){
 		
 		int distance;
-		ArrayList<OrderedPair> closest;
+
+		// set the closest distance as the distance between
+		// the first to points to have a base
+		double closestDistance = distanceBetween(points(0),points(1));
+
+		// note that points that are paired wil always be right next to each other in the array
+		ArrayList<OrderedPair> closest = new ArrayList();
 
 		// go through each pair and see if distance between
 		// is smaller than current closestDistance
-		for(int i = 0; i < numPoints-1; i++){
-			for(int j = i+1; j < numPoints; j++){
+		for(int i = 0; i < numPoints()-1; i++){
+			for(int j = i+1; j < numPoints(); j++){
 				distance = distanceBetween(points(i),points(j));
 
 				// if distance is smaller, then reset our array
@@ -74,11 +101,63 @@ private class Points{
 	}
 
 	private ArrayList<OrderedPair> basicDnC(ArrayList<OrderedPair> input){
+
+		if(input.size() == 2){
+			return input;
+		}
+
+		if(input.size() == 3){
+			ArrayList<OrderedPair> closest = new ArrayList();
+
+			// set the closest distance as the distance between
+			// the first to points to have a base
+			double closestDistance = distanceBetween(points(0),points(1));
+			closest.add(point(0));
+			closest.add(point(1));
+			if(distanceBetween(points(1),points(2)) < closestDistance){
+				closest.clear();
+				closest.add(points(1));
+				closest.add(points(2));
+				closestDistance = distanceBetween(points(1),points(2));
+			}
+			if(distanceBetween(points(1),points(2)) == closestDistance){
+				closest.add(points(1));
+				closest.add(points(2));
+			}
+			if(distanceBetween(points(0),points(2)) < closestDistance){
+				closest.clear();
+				closest.add(points(0));
+				closest.add(points(2));
+				closestDistance = distanceBetween(points(0),points(2));
+			}
+			if(distanceBetween(points(0),points(2)) == closestDistance){
+				closest.add(points(0));
+				closest.add(points(2));
+			}
+			return closest;
+		}
+
+		// split up the array in half
+		int half = input.size()/2
+		ArrayList<OrderedPair> left = input.sublist(0,half);
+		ArrayList<OrderedPair> right = input.sublist(half+1,input.size());
+
+		ArrayList<OrderedPair> leftClosest = basicDnC(left);
+		ArrayList<OrderedPair> rightClosest = basicDnC(right);
+
+		// see which pair in each half is closer
+		double distanceL = distanceBetween(leftClosest(0),leftClosest(1));
+		double distanceR = distanceBetween(rightClosest(0),leftClosest(1));
+
+		ArrayList<OrderedPair> closest = new ArrayList();
+
+		if(distanceL == distanceR){
+
+		}
+
+
+		// now we set up the strip
 		
-		int distance;
-		ArrayList<OrderedPair> closest;
-		if()
-		int mid = numPoints/2;
 
 
 		return closest;
@@ -86,13 +165,16 @@ private class Points{
 	}
 
 	private ArrayList<OrderedPair> DnC(ArrayList<OrderedPair> input){
+
+		if(input.size() == 2){
+			return input;
+		}
 		
 		int distance;
 		ArrayList<OrderedPair> closest;
-		int mid = numPoints/2;
+		int mid = numPoints()/2;
+
 		
-
-
 		return closest;
 	}
 
@@ -100,5 +182,10 @@ private class Points{
 	
 		return(Math.sqrt(Math.pow((b.x-a.x),2)+Math.pow(b.y-a.y),2));
 	
+	}
+
+	private int numPoints(){
+		
+		return points.size();
 	}
 }
