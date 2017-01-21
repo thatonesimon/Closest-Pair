@@ -5,6 +5,20 @@ private class OrderedPair{
 	public double x;
 	public double y;
 
+	class compX implements Comparator<OrderedPair>{
+
+		public int compare(OrderedPair a, OrderedPair b){
+			return a.x.compareTo(b.x);
+		}
+	}
+
+	class compY implements Comparator<OrderedPair>{
+		
+		public int compare(OrderedPair a, OrderedPair b){
+			return a.y.compareTo(b.y)
+		}
+	}
+
 	public OrderedPair(double x, double y){
 		this.x = x;
 		this.y = y;

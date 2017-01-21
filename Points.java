@@ -61,6 +61,11 @@ private class Points{
 		return sorted;
 
 	}
+
+	private ArrayList<ArrayList> mergeX(ArrayList<OrderedPair> l, ArrayList<OrderedPair> r){
+
+		for
+	}
 	
 	private ArrayList<OrderedPair> greedy(){
 		
@@ -152,7 +157,7 @@ private class Points{
 		ArrayList<OrderedPair> closest = new ArrayList();
 
 		if(distanceL == distanceR){
-
+			
 		}
 
 
