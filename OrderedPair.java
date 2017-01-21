@@ -8,14 +8,20 @@ private class OrderedPair{
 	class compX implements Comparator<OrderedPair>{
 
 		public int compare(OrderedPair a, OrderedPair b){
+			if(a.x == b.x){
+				return a.y.compareTo(b.y);
+			}
 			return a.x.compareTo(b.x);
 		}
 	}
 
 	class compY implements Comparator<OrderedPair>{
-		
+
 		public int compare(OrderedPair a, OrderedPair b){
-			return a.y.compareTo(b.y)
+			if(a.y == b.y){
+				return a.x.compareTo(b.x);
+			}
+			return a.y.compareTo(b.y);
 		}
 	}
 

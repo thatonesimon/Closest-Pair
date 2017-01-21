@@ -14,57 +14,18 @@ private class Points{
 
 	private ArrayList<OrderedPair> orderByX(ArrayList<OrderedPair> list){
 
-		if(list.size() == 1){
-			return list;
-		}
-
-		if(list.size() == 2){
-			if(list(0).smallerX(list(1))){
-				return list;
-			}
-			ArrayList<OrderedPair> sorted = new ArrayList();
-			sorted.add(list(1));
-			sorted.add(list(0));
-			return sorted;
-		}
-		
 		ArrayList<OrderedPair> sorted = new ArrayList();
-
-		for(int i = 0; i < list.size()-1; i++){
-			
-		}
+		sorted = Collections.sort(list,compX);
 		return sorted;
 	
 	}
 
 	private ArrayList<OrderedPair> orderByY(ArrayList<OrderedPair> list){
 
-		if(list.size() == 1){
-			return list;
-		}
-
-		if(list.size() == 2){
-			if(list(0).smallerY(list(1))){
-				return list;
-			}
-			ArrayList<OrderedPair> sorted = new ArrayList();
-			sorted.add(list(1));
-			sorted.add(list(0));
-			return sorted;
-		}
-		
-		ArrayList<OrderedPair> sorted;
-
-		for(int i = 0; i < list.size()-1; i++){
-
-		}
+		ArrayList<OrderedPair> sorted = new ArrayList();
+		sorted = Collections.sort(list,compY);
 		return sorted;
 
-	}
-
-	private ArrayList<ArrayList> mergeX(ArrayList<OrderedPair> l, ArrayList<OrderedPair> r){
-
-		for
 	}
 	
 	private ArrayList<OrderedPair> greedy(){
@@ -157,7 +118,7 @@ private class Points{
 		ArrayList<OrderedPair> closest = new ArrayList();
 
 		if(distanceL == distanceR){
-			
+
 		}
 
 
@@ -184,8 +145,11 @@ private class Points{
 	}
 
 	private double distanceBetween(OrderedPair a, OrderedPair b){
-	
-		return(Math.sqrt(Math.pow((b.x-a.x),2)+Math.pow(b.y-a.y),2));
+
+		double d = Math.sqrt(Math.pow((b.x-a.x),2)+Math.pow(b.y-a.y),2);
+		long temp = f * 10000000 + 0.5; // round up
+		d = temp/10000000.0;
+		return d;
 	
 	}
 

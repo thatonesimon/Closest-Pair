@@ -19,16 +19,13 @@ class ReadFile{
 		// throwing out lines that don't fit criteria
 		while(line = input.readLine()){
 
-// THIS NEEDS SOME FIXING, NUMBERS CAN HAVE MORE THAN ONE SPACE IN BETWEEN THEM.
-
-			// if there is more than one space in the line 
-			if(line.length() - line.replace(" ","").length() != 1){
-				// do nothing with that line
-				continue;
-			}
-
 			// split up the line by the space
 			point = line.split(" ");
+
+			// if there are not just two things in the line, do nothing
+			if(point.length != 2){
+				continue;
+			}
 
 			// try to parse our points to double
 			try{
@@ -41,7 +38,8 @@ class ReadFile{
 			}
 
 			// truncate the two points to 7 decimal points
-			
+			x = round7(x);
+			y = round7(y);
 
 			// turn points into an ordered pair
 			OrderedPair op = new OrderedPair(x,y);
@@ -68,11 +66,18 @@ class ReadFile{
 
 		Points points = new Points(p);  
 
+		// do stuff depending on the input commands ()
 		ArrayList<OrderedPair> closestPairs;
 
 		System.out.println("closest pair distance: " + p.closestDistance);
 		for(int i = 0; i < closestPairs.size(); i++){
 			System.out.print("(" + Double.toString(closestPairs(i).x) + ", " + Double.toString(closestPairs(i).y) + ") ");
 		}
+	}
+
+	private double round7(double f) {
+		long temp = f * 10000000 + 0.5; // round up
+		double d = temp/10000000.0;
+		return d;
 	}
 }
