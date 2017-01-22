@@ -53,5 +53,11 @@ private class OrderedPair{
 		}
 		return false;
 	}
+
+	public String toString(){
+
+		String result = "(" + Double.toString(x) + ", " + Double.toString(y) + ") ";
+		return result;
+	}
 	
 }

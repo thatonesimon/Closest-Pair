@@ -1,8 +1,13 @@
 package edu.usb.cs.csil.sswong.ClosestPair;
 
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import Points;
+import OrderedPair;
 
 class ReadFile{
 	
@@ -17,7 +22,7 @@ class ReadFile{
 
 		// reading points from the input file
 		// throwing out lines that don't fit criteria
-		while(line = input.readLine()){
+		while(line == input.readLine()){
 
 			// split up the line by the space
 			point = line.split(" ");
@@ -67,11 +72,17 @@ class ReadFile{
 		Points points = new Points(p);  
 
 		// do stuff depending on the input commands ()
-		ArrayList<OrderedPair> closestPairs;
+		ArrayList<OrderedPair> closestPairs = new ArrayList();
+
+		// for now, just brute force
+		closestPairs = p.greedy();
 
 		System.out.println("closest pair distance: " + p.closestDistance);
-		for(int i = 0; i < closestPairs.size(); i++){
-			System.out.print("(" + Double.toString(closestPairs(i).x) + ", " + Double.toString(closestPairs(i).y) + ") ");
+		for(int i = 0; i < closestPairs.size()/2; i++){
+			int index = 2*i;
+			System.out.print(closestPairs(index).toString());
+			System.out.println(closestPairs(index+1).toString());
+
 		}
 	}
 

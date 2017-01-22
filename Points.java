@@ -1,6 +1,9 @@
 package edu.usb.cs.csil.sswong.ClosestPair;
 
-import static java.lang.Math;
+import java.lang.Math;
+import java.util.ArrayList;
+
+import OrderedPair;
 
 private class Points{
 
@@ -77,28 +80,28 @@ private class Points{
 
 			// set the closest distance as the distance between
 			// the first to points to have a base
-			double closestDistance = distanceBetween(points(0),points(1));
+			double closestDistance = distanceBetween(input(0),input(1));
 			closest.add(point(0));
 			closest.add(point(1));
-			if(distanceBetween(points(1),points(2)) < closestDistance){
+			if(distanceBetween(input(1),input(2)) < closestDistance){
 				closest.clear();
-				closest.add(points(1));
-				closest.add(points(2));
-				closestDistance = distanceBetween(points(1),points(2));
+				closest.add(input(1));
+				closest.add(input(2));
+				closestDistance = distanceBetween(input(1),input(2));
 			}
-			if(distanceBetween(points(1),points(2)) == closestDistance){
-				closest.add(points(1));
-				closest.add(points(2));
+			if(distanceBetween(input(1),input(2)) == closestDistance){
+				closest.add(input(1));
+				closest.add(input(2));
 			}
-			if(distanceBetween(points(0),points(2)) < closestDistance){
+			if(distanceBetween(input(0),input(2)) < closestDistance){
 				closest.clear();
-				closest.add(points(0));
-				closest.add(points(2));
-				closestDistance = distanceBetween(points(0),points(2));
+				closest.add(input(0));
+				closest.add(input(2));
+				closestDistance = distanceBetween(input(0),input(2));
 			}
-			if(distanceBetween(points(0),points(2)) == closestDistance){
-				closest.add(points(0));
-				closest.add(points(2));
+			if(distanceBetween(input(0),input(2)) == closestDistance){
+				closest.add(input(0));
+				closest.add(input(2));
 			}
 			return closest;
 		}
