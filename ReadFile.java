@@ -6,9 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Points;
-import OrderedPair;
-
 class ReadFile{
 	
 	public static void main(String[] args){

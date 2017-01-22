@@ -3,8 +3,6 @@ package edu.usb.cs.csil.sswong.ClosestPair;
 import java.lang.Math;
 import java.util.ArrayList;
 
-import OrderedPair;
-
 private class Points{
 
 	private ArrayList<OrderedPair> points;
