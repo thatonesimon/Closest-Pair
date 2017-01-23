@@ -1,11 +1,13 @@
 package edu.usb.cs.csil.sswong.ClosestPair;
 
-private class OrderedPair{
+import java.util.Comparator;
 
-	public double x;
-	public double y;
+public class OrderedPair{
 
-	class compX implements Comparator<OrderedPair>{
+	public Double x;
+	public Double y;
+
+	class CompX implements Comparator<OrderedPair>{
 
 		public int compare(OrderedPair a, OrderedPair b){
 			if(a.x == b.x){
@@ -15,7 +17,7 @@ private class OrderedPair{
 		}
 	}
 
-	class compY implements Comparator<OrderedPair>{
+	class CompY implements Comparator<OrderedPair>{
 
 		public int compare(OrderedPair a, OrderedPair b){
 			if(a.y == b.y){

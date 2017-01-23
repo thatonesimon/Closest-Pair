@@ -6,14 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class ReadFile{
+public class ReadFile{
 	
 	public static void main(String[] args){
 
 		// System.in is the input given to the program
 		// in this case, input redirection might be used (<)
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-		ArrayList<OrderedPair> p;
+		ArrayList<OrderedPair> p = new ArrayList<OrderedPair>();
 		String line;
 		String[] point;
 
@@ -69,7 +69,7 @@ class ReadFile{
 		Points points = new Points(p);  
 
 		// do stuff depending on the input commands ()
-		ArrayList<OrderedPair> closestPairs = new ArrayList();
+		ArrayList<OrderedPair> closestPairs = new ArrayList<OrderedPair>();
 
 		// for now, just brute force
 		closestPairs = p.greedy();
