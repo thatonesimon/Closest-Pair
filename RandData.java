@@ -1,17 +1,22 @@
-package edu.usb.cs.csil.sswong.ClosestPair;
+import java.util.Random;
+import java.lang.Integer;
 
-class RandData{
+public class RandData{
 
-	private static int MIN = -10000;
-	private static int MAX = 10000;
+	public static void main(String[] args){
 
-	private double random(int n){
-
-		for(int i = 0; i < n; i++){
-			return MIN + (MAX - MIN) * (double) rand() / RAND_MAX;
+		int numNums = Integer.parseInt(args[0]);
+		for(int i = 0; i < numNums; i++){
+			System.out.println(Double.toString(rand()) + " " + Double.toString(rand()));
 		}
-
+		return;
 	}
 
-	 
+	private static double rand(){
+
+		Random r = new Random();
+		double randomValue = -10000 + (20000) * r.nextDouble();
+		return randomValue;
+	}
+	
 }

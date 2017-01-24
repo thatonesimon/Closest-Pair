@@ -71,10 +71,18 @@ public class ReadFile{
 		// do stuff depending on the input commands ()
 		ArrayList<OrderedPair> closestPairs = new ArrayList<OrderedPair>();
 
-		// for now, just brute force
-		closestPairs = points.greedy();
+		/*// for now, just brute force
+		// we'll sort first so that we don't have
+		// to deal with sorting for this one
+		// please excuse the terrible syntax
+		points.points = points.orderByX(points.points);
+		closestPairs = points.brute();*/
+
+		closestPairs = points.basicDnC(points.points);
+
 
 		System.out.println("closest pair distance: " + points.distanceBetween(closestPairs.get(0),closestPairs.get(1)));
+
 
 		for(int i = 0; i < closestPairs.size()/2; i++){
 			int index = 2*i;
