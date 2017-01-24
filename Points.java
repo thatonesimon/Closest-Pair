@@ -1,5 +1,3 @@
-package edu.usb.cs.csil.sswong.ClosestPair;
-
 import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,25 +14,23 @@ public class Points{
 
 	private ArrayList<OrderedPair> orderByX(ArrayList<OrderedPair> list){
 
-		ArrayList<OrderedPair> sorted = new ArrayList<OrderedPair>();
-		CompX compX = new CompX();
-		sorted = Collections.sort(list,compX);
-		return sorted;
+		OrderedPair.CompX compX = new OrderedPair.CompX();
+		Collections.sort(list,compX);
+		return list;
 	
 	}
 
 	private ArrayList<OrderedPair> orderByY(ArrayList<OrderedPair> list){
 
-		ArrayList<OrderedPair> sorted = new ArrayList<OrderedPair>();
-		CompY compY = new CompY();
-		sorted = Collections.sort(list,compY);
-		return sorted;
+		OrderedPair.CompY compY = new OrderedPair.CompY();
+		Collections.sort(list,compY);
+		return list;
 
 	}
 	
-	private ArrayList<OrderedPair> greedy(){
+	public ArrayList<OrderedPair> greedy(){
 		
-		int distance;
+		double distance;
 
 		// set the closest distance as the distance between
 		// the first to points to have a base
@@ -110,8 +106,8 @@ public class Points{
 
 		// split up the array in half
 		int half = input.size()/2;
-		ArrayList<OrderedPair> left = new ArrayList<OrderedPair>(input.sublist(0,half));
-		ArrayList<OrderedPair> right = new ArrayList<OrderedPair>(input.sublist(half+1,input.size()));
+		ArrayList<OrderedPair> left = new ArrayList<OrderedPair>(input.subList(0,half));
+		ArrayList<OrderedPair> right = new ArrayList<OrderedPair>(input.subList(half+1,input.size()));
 
 		ArrayList<OrderedPair> leftClosest = basicDnC(left);
 		ArrayList<OrderedPair> rightClosest = basicDnC(right);
@@ -142,17 +138,16 @@ public class Points{
 		}
 		
 		int distance;
-		ArrayList<OrderedPair> closest;
+		ArrayList<OrderedPair> closest = new ArrayList<OrderedPair>();
 		int mid = numPoints()/2;
-
 		
 		return closest;
 	}
 
-	private double distanceBetween(OrderedPair a, OrderedPair b){
+	public double distanceBetween(OrderedPair a, OrderedPair b){
 
-		double d = Math.sqrt(Math.pow((b.x-a.x),2)+Math.pow(b.y-a.y),2);
-		long temp = f * 10000000 + 0.5; // round up
+		double d = Math.sqrt(Math.pow((b.x-a.x),2)+Math.pow(b.y-a.y,2));
+		int temp = (int)((d * 10000000) + 0.5);
 		d = temp/10000000.0;
 		return d;
 	
@@ -162,4 +157,5 @@ public class Points{
 		
 		return points.size();
 	}
+
 }
