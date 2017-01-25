@@ -3,10 +3,18 @@ import java.io.InputStreamReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class ReadFile{
 	
 	public static void main(String[] args) throws IOException{
+
+		if(args.length != 1){
+			System.out.println("usage: closestPair [brute|basic|optimal]");
+			return;
+		}
+
+		String cmd = args[0];
 
 		// System.in is the input given to the program
 		// in this case, input redirection might be used (<)
@@ -71,15 +79,27 @@ public class ReadFile{
 		// do stuff depending on the input commands ()
 		ArrayList<OrderedPair> closestPairs = new ArrayList<OrderedPair>();
 
-		/*// for now, just brute force
-		// we'll sort first so that we don't have
-		// to deal with sorting for this one
-		// please excuse the terrible syntax
-		points.points = points.orderByX(points.points);
-		closestPairs = points.brute();*/
+		switch(cmd){
+			case "brute":
 
-		closestPairs = points.basicDnC(points.points);
+				// we'll sort first so that we don't have
+				// to deal with sorting for this one
+				// please excuse the terrible syntax
+				// points.points = points.orderByX(points.points);
+				closestPairs = points.brute(points.points);
 
+			case "basic":
+
+				closestPairs = points.basicDnC(points.points);
+
+			case "optimal":
+
+				// closestPairs = points.optimalDnC(points.points);
+
+		}
+
+		ArrayList<OrderedPair> closestPairsOrdered = new ArrayList<OrderedPair>();
+		
 
 		System.out.println("closest pair distance: " + points.distanceBetween(closestPairs.get(0),closestPairs.get(1)));
 
@@ -93,8 +113,13 @@ public class ReadFile{
 	}
 
 	public static double round7(double d) {
-		int temp = (int)((d * 10000000)+0.5);
-		d = temp/10000000.0;
+
+		d = Math.round(d * 10000000);
+		d = d/10000000;
 		return d;
+
+		/*long temp = (long)((d * 10000000)+0.5);
+		d = temp/10000000.0;
+		return d;*/
 	}
 }

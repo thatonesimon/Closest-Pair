@@ -7,7 +7,7 @@ if [ "$#" -ne 1 ]; then
 	exit 1
 fi
 
-java -cp bin/ MyProgram $ARG#!/bin/bash
+java -cp bin/ ReadFile.java Points.java OrderedPair.java $ARG#!/bin/bash
 
 ARG=$1
 
@@ -16,4 +16,4 @@ if [ "$#" -ne 1 ]; then
 	exit 1
 fi
 
-java -cp bin/ MyProgram $ARG
+java -cp bin/ ReadFile $ARG
