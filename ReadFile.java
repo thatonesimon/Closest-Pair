@@ -94,12 +94,12 @@ public class ReadFile{
 
 			case "optimal":
 
-				// closestPairs = points.optimalDnC(points.points);
+				closestPairs = points.optimalDnC(points.points);
 
 		}
 
 		ArrayList<OrderedPair> closestPairsOrdered = new ArrayList<OrderedPair>();
-		
+
 
 		System.out.println("closest pair distance: " + points.distanceBetween(closestPairs.get(0),closestPairs.get(1)));
 

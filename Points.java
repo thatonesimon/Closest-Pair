@@ -183,7 +183,7 @@ public class Points{
 
 	}
 
-	public ArrayList<OrderedPair> optimalDnC(ArrayList<OrderedPair> input, int start, int end){
+	public ArrayList<OrderedPair> optimalDnC(ArrayList<OrderedPair> input){
 
 		if(input.size() == 2){
 			return input;
@@ -231,8 +231,8 @@ public class Points{
 		ArrayList<OrderedPair> left = new ArrayList<OrderedPair>(input.subList(0,half));
 		ArrayList<OrderedPair> right = new ArrayList<OrderedPair>(input.subList(half,input.size()));
 
-		ArrayList<OrderedPair> leftClosest = basicDnC(left);
-		ArrayList<OrderedPair> rightClosest = basicDnC(right);
+		ArrayList<OrderedPair> leftClosest = optimalDnC(left);
+		ArrayList<OrderedPair> rightClosest = optimalDnC(right);
 
 		// see which pair in each half is closer
 		double distanceL = distanceBetween(leftClosest.get(0),leftClosest.get(1));
@@ -255,56 +255,38 @@ public class Points{
 
 
 		// now we set up the strip
-		ArrayList<OrderedPair> stripPoints = new ArrayList<OrderedPair>();
 		double mid = (input.get(half).x+input.get(half+1).x)/2;
-		// check left
-		int i = 0;
-		while(half-1-i >= 0){
-			if(input.get(half-1-i).x > mid-bestD){
-				stripPoints.add(input.get(half-1));
-				i++;
-			}
-			else{
-				break;
-			}
-		}
+		OrderedPair temp;
+		int cnt;
 
-		// check right
-		i = 0;
-		while(half+i < input.size()){
-			if(input.get(half+i).x < mid+bestD){
-				stripPoints.add(input.get(half+i));
-				i++;
-			}
-			else{
-				break;
-			}
-		}
+		for(int i = 0; i < yOrdered.size(); i++){
+			temp = yOrdered.get(i);
+			if(temp.x > (mid-bestD) && temp.x < (mid+bestD)){
+				cnt = 0;
+				for(int j = 1; j < yOrdered.size()-i; j++){
 
-		// order them for checking
-		stripPoints = this.orderByY(stripPoints);
+					// if in the strip
+					if(yOrdered.get(i+j).x > (mid-bestD) && yOrdered.get(i+j).x < (mid+bestD)){
+						if(distanceBetween(temp,yOrdered.get(i+j)) < bestD){
+							closest.clear();
+							closest.add(temp);
+							closest.add(yOrdered.get(i+j));
+							bestD = distanceBetween(temp,yOrdered.get(i+j));
+							cnt++;
+						}
+						else if(distanceBetween(temp,yOrdered.get(i+j)) == bestD){
+							closest.add(temp);
+							closest.add(yOrdered.get(i+j));
+						}
+					}
 
-		for(i = 0; i < stripPoints.size()-1; i++){
-			for(int j = i+1; stripPoints.get(j).y < stripPoints.get(i).y+bestD; j++){
-				if(distanceBetween(stripPoints.get(i),stripPoints.get(j)) < bestD){
-					closest.clear();
-					closest.add(stripPoints.get(i));
-					closest.add(stripPoints.get(j));
-					bestD = distanceBetween(stripPoints.get(i),stripPoints.get(j));
-				}
-				else if(distanceBetween(stripPoints.get(i),stripPoints.get(j)) == bestD){
-					closest.add(stripPoints.get(i));
-					closest.add(stripPoints.get(j));
-				}
-				if(j+1 >= stripPoints.size()){
-					break;
+					// pigeonhole principle stuff
+					if(cnt >= 6){
+						break;
+					}
 				}
 			}
 		}
-
-
-		
-		int mid = numPoints()/2;
 		
 		return closest;
 	}
