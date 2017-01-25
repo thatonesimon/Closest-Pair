@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.lang.Math;
+import java.lang.Integer;
 
 public class ReadFile{
 	
@@ -99,6 +100,7 @@ public class ReadFile{
 		}
 
 		ArrayList<OrderedPair> closestPairsOrdered = new ArrayList<OrderedPair>();
+		closestPairsOrdered = sortPairs(closestPairs);
 
 
 		System.out.println("closest pair distance: " + points.distanceBetween(closestPairs.get(0),closestPairs.get(1)));
@@ -121,5 +123,34 @@ public class ReadFile{
 		/*long temp = (long)((d * 10000000)+0.5);
 		d = temp/10000000.0;
 		return d;*/
+	}
+
+	public static ArrayList<OrderedPair> sortPairs(ArrayList<OrderedPair> input){
+
+		// sort points in the pairs
+		for(int i = 0; i < input.size()/2; i++){
+			if(input.get(2*i).x > input.get(2*i+1).x){
+				OrderedPair temp = new OrderedPair(input.get(2*i).x,input.get(2*i).y);
+				input.set(2*i,input.get(2*i+1));
+				input.set(2*i+1,temp);
+			}
+			else if(input.get(2*i).x == input.get(2*i+1).x){
+				if(input.get(2*i).y > input.get(2*i).y){
+					OrderedPair temp = new OrderedPair(input.get(2*i).x,input.get(2*i).y);
+					input.set(2*i,input.get(2*i+1));
+					input.set(2*i+1,temp);
+				}
+			}
+		}
+
+/*		// sort pairs in the list
+		ArrayList<Integer> sorted = new ArrayList<Integer>();
+		sorted.add(0);
+
+		for(int i = 1; i < input.size()/2; i++){
+			if(input.get(2*i).x )
+		}*/
+
+		return input;
 	}
 }
