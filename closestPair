@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ARG=$1
 
@@ -7,7 +7,7 @@ if [ "$#" -ne 1 ]; then
 	exit 1
 fi
 
-javac -cp bin/ ReadFile.java Points.java OrderedPair.java $ARG#!/bin/bash
+javac ReadFile.java Points.java OrderedPair.java
 
 ARG=$1
 
@@ -16,4 +16,4 @@ if [ "$#" -ne 1 ]; then
 	exit 1
 fi
 
-java -cp bin/ ReadFile $ARG
+java ReadFile $ARG
